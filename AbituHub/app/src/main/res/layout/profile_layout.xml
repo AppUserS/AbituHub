@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_cover_image"
-                android:background="#3949ab"
+                android:background="#5c6bc0"
                 android:elevation="4dp"
                 android:paddingBottom="24dp">
 
