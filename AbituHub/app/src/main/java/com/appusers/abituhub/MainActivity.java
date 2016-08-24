@@ -3,7 +3,6 @@ package com.appusers.abituhub;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,20 +22,21 @@ import com.mikepenz.materialdrawer.model.interfaces.Badgeable;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
-public class NavigationDrawer extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private Drawer.Result drawerResult = null;
+    private Toolbar toolbar;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.navigation_drawer_main);
+        setContentView(R.layout.main_layout);
 
         // Инициализируем ToolBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initToolbar();
+
+
 
         // Инициализируем Navigation Drawer
         new Drawer()
@@ -58,8 +58,8 @@ public class NavigationDrawer extends ActionBarActivity {
                     @Override
                     public void onDrawerOpened(View drawerView) {
                         // Скрываем клавиатуру при открытии Navigation Drawer
-                        InputMethodManager inputMethodManager = (InputMethodManager) NavigationDrawer.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        inputMethodManager.hideSoftInputFromWindow(NavigationDrawer.this.getCurrentFocus().getWindowToken(), 0);
+                        InputMethodManager inputMethodManager = (InputMethodManager) MainActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), 0);
                     }
 
                     @Override
@@ -71,7 +71,7 @@ public class NavigationDrawer extends ActionBarActivity {
                     // Обработка клика
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         if (drawerItem instanceof Nameable) {
-                            Toast.makeText(NavigationDrawer.this, NavigationDrawer.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, MainActivity.this.getString(((Nameable) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
                         }
                         if (drawerItem instanceof Badgeable) {
                             Badgeable badgeable = (Badgeable) drawerItem;
@@ -94,7 +94,7 @@ public class NavigationDrawer extends ActionBarActivity {
                     // Обработка длинного клика, например, только для SecondaryDrawerItem
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
                         if (drawerItem instanceof SecondaryDrawerItem) {
-                            Toast.makeText(NavigationDrawer.this, NavigationDrawer.this.getString(((SecondaryDrawerItem) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, MainActivity.this.getString(((SecondaryDrawerItem) drawerItem).getNameRes()), Toast.LENGTH_SHORT).show();
                         }
                         return false;
                     }
@@ -102,6 +102,9 @@ public class NavigationDrawer extends ActionBarActivity {
                 .build();
     }
 
+
+
+    //Navigation Drawer
     @Override
     public void onBackPressed() {
         // Закрываем Navigation Drawer по нажатию системной кнопки "Назад" если он открыт
@@ -131,4 +134,22 @@ public class NavigationDrawer extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    //Toolbar
+    private void initToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        toolbar.inflateMenu(R.menu.main_menu);
+    }
+
 }

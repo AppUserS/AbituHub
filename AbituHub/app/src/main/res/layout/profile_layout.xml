@@ -28,7 +28,7 @@
                     android:id="@+id/rezults"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_donat_large"
+                    android:src="@mipmap/ic_donat_large"
                     android:layout_alignTop="@+id/profile_settings" android:layout_toLeftOf="@+id/profile_settings"
                     android:layout_toStartOf="@+id/profile_settings"/>
 
@@ -39,12 +39,12 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_build" />
+                    android:src="@mipmap/ic_build" />
             <ImageButton
                     android:id="@+id/back"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_back"
+                    android:src="@mipmap/ic_back"
                     android:layout_alignTop="@+id/rezults" android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
 
